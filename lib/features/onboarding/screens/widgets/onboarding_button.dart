@@ -6,6 +6,7 @@ import '../../../../core/config/page_route_name.dart';
 import '../../../../utils/constants/const_colors.dart';
 import '../../../../utils/constants/const_text.dart';
 import '../../controllers/onboarding_cubit.dart';
+import '../../models/onboarding_model.dart';
 
 class OnboardingButton extends StatelessWidget {
   const OnboardingButton({super.key});
@@ -16,7 +17,7 @@ class OnboardingButton extends StatelessWidget {
 
     return BlocBuilder<OnboardingCubit, OnboardingState>(
       builder: (context, state) {
-        final bool isLastPage = onboardingCubit.currentPage == onboardingCubit.pages.length - 1;
+        final bool isLastPage = onboardingCubit.currentPage == onboardingList.length - 1;
         final Color buttonColor =
             isLastPage ? ConstColors.secondaryColor : ConstColors.primaryColor;
         final String buttonText =
@@ -24,21 +25,6 @@ class OnboardingButton extends StatelessWidget {
 
         return Hero(
           tag: "auth-button",
-          flightShuttleBuilder: (
-              BuildContext flightContext,
-              Animation<double> animation,
-              HeroFlightDirection flightDirection,
-              BuildContext fromHeroContext,
-              BuildContext toHeroContext,
-              ) {
-            // Wrap the widget in a ScaleTransition that uses an easeInOut curve.
-            return ScaleTransition(
-              scale: animation.drive(CurveTween(curve: Curves.easeInOut)),
-              child: flightDirection == HeroFlightDirection.push
-                  ? toHeroContext.widget
-                  : fromHeroContext.widget,
-            );
-          },
           child: Padding(
             padding: EdgeInsets.all(12.h),
             child: AnimatedContainer(

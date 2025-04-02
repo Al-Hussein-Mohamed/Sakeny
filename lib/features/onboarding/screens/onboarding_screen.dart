@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sakeny/features/onboarding/models/onboarding_model.dart';
+import 'package:sakeny/features/onboarding/models/onboarding_model.dart';
 import 'package:sakeny/features/onboarding/screens/widgets/language_dropdown.dart';
 import 'package:sakeny/features/onboarding/screens/widgets/onboard_custom_page.dart';
 import 'package:sakeny/features/onboarding/screens/widgets/onboarding_button.dart';
@@ -41,25 +43,29 @@ class OnboardingBody extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(onPressed: ()=> onboardingCubit.exit(context), icon: Icon(Icons.close, size: 24.sp)),
+                    IconButton(
+                        onPressed: () => onboardingCubit.exit(context),
+                        icon: Icon(Icons.close, size: 24.spMin)),
                     const LanguageDropdown(),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 60.h,
-              ),
-              SizedBox(
-                height: 480.h,
+              Expanded(
+                flex: 7,
                 child: PageView.builder(
                   controller: onboardingCubit.pageController,
                   onPageChanged: onboardingCubit.changePage,
-                  itemCount: onboardingCubit.pages.length,
-                  itemBuilder: (context, index) => onboardingCubit.pages[index],
+                  itemCount: onboardingList.length,
+                  itemBuilder: (context, index) => Center(
+                    child: SingleChildScrollView(
+                      child: OnboardingCustomPage(
+                        onboardingModel: onboardingList[index],
+                      ),
+                    ),
+                  ),
                 ),
               ),
-
-              const OnboardingDotNavigation(),
+              const Expanded(child: OnboardingDotNavigation()),
               const OnboardingButton(),
             ],
           ),

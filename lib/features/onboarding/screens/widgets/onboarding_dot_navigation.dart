@@ -16,32 +16,29 @@ class OnboardingDotNavigation extends StatelessWidget {
     final OnboardingCubit onboardingCubit = context.read<OnboardingCubit>();
     return BlocBuilder<OnboardingCubit, OnboardingState>(
       builder: (context, state) {
-        return Padding(
-          padding: EdgeInsets.all(30.h),
-          child: Center(
-            child: SmoothPageIndicator(
-              controller: (onboardingCubit.pageController),
-              onDotClicked: (onboardingCubit.navigationChangePage),
-              count: 3,
-              effect: CustomizableEffect(
-                activeDotDecoration: DotDecoration(
-                  color: ConstColors.primaryColor,
-                  height: 20.r,
-                  width: 50.r,
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                dotDecoration: DotDecoration(
-                  color: Colors.transparent,
-                  height: 20.r,
-                  width: 28.r,
-                  borderRadius: BorderRadius.circular(10.r),
-                  dotBorder: DotBorder(
-                    color: ConstColors.primaryColor,
-                    width: 2.2.r,
-                  ),
-                ),
-                spacing: 10.r, // Spacing between dots
+        return Center(
+          child: SmoothPageIndicator(
+            controller: (onboardingCubit.pageController),
+            onDotClicked: (onboardingCubit.navigationChangePage),
+            count: 3,
+            effect: CustomizableEffect(
+              activeDotDecoration: DotDecoration(
+                color: ConstColors.primaryColor,
+                height: 20.r,
+                width: 50.r,
+                borderRadius: BorderRadius.circular(10.r),
               ),
+              dotDecoration: DotDecoration(
+                color: Colors.transparent,
+                height: 20.r,
+                width: 28.r,
+                borderRadius: BorderRadius.circular(10.r),
+                dotBorder: DotBorder(
+                  color: ConstColors.primaryColor,
+                  width: 2.2.r,
+                ),
+              ),
+              spacing: 10.r, // Spacing between dots
             ),
           ),
         );

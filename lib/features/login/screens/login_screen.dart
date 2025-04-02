@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/config/page_route_name.dart';
+import '../../onboarding/controllers/onboarding_cubit.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -8,38 +11,42 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                PageRouteNames.onboarding,
-                (route) => false,
-              );
-            },
-            icon: const Icon(Icons.arrow_back),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+      ),
+      body: Center(
+        child: Hero(
+          tag: "auth-button",
+          child: Padding(
+            padding: EdgeInsets.all(12.h),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(10.r),
+              ),
+              child: ElevatedButton(
+                onPressed: ()=> Navigator.pop(context),
+
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(Colors.transparent),
+                  shadowColor: WidgetStateProperty.all(Colors.transparent),
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+                  ),
+                ),
+                child: Text("LOGIN"),
+              ),
+            ),
           ),
         ),
-        body: Hero(
-          tag: "auth-button",
-          flightShuttleBuilder: (
-              BuildContext flightContext,
-              Animation<double> animation,
-              HeroFlightDirection flightDirection,
-              BuildContext fromHeroContext,
-              BuildContext toHeroContext,
-              ) {
-            // Wrap the widget in a ScaleTransition that uses an easeInOut curve.
-            return ScaleTransition(
-              scale: animation.drive(CurveTween(curve: Curves.easeInOut)),
-              child: flightDirection == HeroFlightDirection.push
-                  ? toHeroContext.widget
-                  : fromHeroContext.widget,
-            );
-          },
-          child: Center(
-            child: ElevatedButton(onPressed: () {}, child: Text("login")),
-          ),
-        ));
+      ),
+    );
   }
 }

@@ -1,43 +1,43 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OnboardingCustomPage extends StatelessWidget {
-  final String image;
-  final String title;
-  final String subTitle;
+import '../../models/onboarding_model.dart';
 
-  const OnboardingCustomPage(
-      {super.key, required this.image, required this.title, required this.subTitle});
+class OnboardingCustomPage extends StatelessWidget {
+  final OnboardingModel onboardingModel;
+
+  const OnboardingCustomPage({super.key, required this.onboardingModel});
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
-          image,
-          width: MediaQuery.of(context).size.width * .9,
+          onboardingModel.image,
+          width: 300.w,
         ),
-        SizedBox(height: 40.h,),
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: theme.textTheme.titleMedium?.copyWith(
-            shadows: [
-              const Shadow(
-                color: Colors.black38,
-                offset: Offset(0, 3),
-                blurRadius: 10,
-              ),
-            ],
+        SizedBox(height: 10.h),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            onboardingModel.title,
+            textAlign: TextAlign.center,
+            style: theme.textTheme.titleMedium?.copyWith(
+              shadows: [
+                const Shadow(
+                  color: Colors.black38,
+                  offset: Offset(0, 3),
+                  blurRadius: 10,
+                ),
+              ],
+            ),
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(8.r),
+          padding: EdgeInsets.symmetric(horizontal: 8.r),
           child: Text(
-            subTitle,
+            onboardingModel.description,
             textAlign: TextAlign.center,
             style: theme.textTheme.bodyMedium,
           ),

@@ -12,13 +12,13 @@ import 'core/config/page_router.dart';
 
 void main() {
   serviceLocatorSetup();
-  // runApp(
-  //   DevicePreview(
-  //     enabled: !kReleaseMode,
-  //     builder: (context) => const Sakeny(),
-  //   ),
-  // );
-  runApp(const Sakeny());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const Sakeny(),
+    ),
+  );
+  // runApp(const Sakeny());
 }
 
 class Sakeny extends StatelessWidget {
