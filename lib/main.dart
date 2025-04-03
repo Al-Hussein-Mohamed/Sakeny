@@ -10,15 +10,22 @@ import 'package:sakeny/utils/theme/theme.dart';
 import 'core/config/page_route_name.dart';
 import 'core/config/page_router.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
+
   serviceLocatorSetup();
-  runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const Sakeny(),
-    ),
-  );
-  // runApp(const Sakeny());
+  // if (kDebugMode) {
+  //   runApp(
+  //     DevicePreview(
+  //       enabled: true,
+  //       builder: (context) => const Sakeny(),
+  //     ),
+  //   );
+  // } else {
+  //   runApp(const Sakeny());
+  // }
+  runApp(const Sakeny());
 }
 
 class Sakeny extends StatelessWidget {
@@ -27,6 +34,10 @@ class Sakeny extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return ScreenUtilInit(
       designSize: const Size(393, 852),
       minTextAdapt: true,

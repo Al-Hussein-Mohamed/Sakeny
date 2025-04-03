@@ -17,6 +17,8 @@ class LanguageDropdown extends StatelessWidget {
         itemsListPadding: EdgeInsets.all(8.r),
         listItemPadding: EdgeInsets.all(8.r),
         decoration: CustomDropdownDecoration(
+          closedBorder: Border.all(color: Colors.white),
+          closedBorderRadius: BorderRadius.circular(10.r),
           closedShadow: [
             const BoxShadow(
               color: Colors.black38,
@@ -37,9 +39,7 @@ class LanguageDropdown extends StatelessWidget {
         ),
         initialItem: _lang[0],
         items: _lang,
-        onChanged: (lang) {
-
-        },
+        onChanged: (lang) {},
       ),
     );
   }

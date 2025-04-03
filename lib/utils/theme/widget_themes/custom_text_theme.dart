@@ -11,7 +11,7 @@ class CustomTextTheme{
 
     bodyLarge: TextStyle(fontSize: 18.spMin, fontWeight: FontWeight.w700, color: ConstColors.lightTextBody),
     bodyMedium: TextStyle(fontSize: 16.spMin, fontWeight: FontWeight.w700, color: ConstColors.lightTextBody),
-    bodySmall: TextStyle(fontSize: 14.spMin, fontWeight: FontWeight.w700, color: ConstColors.lightTextBody),
+    bodySmall: TextStyle(fontSize: 14.spMin, fontWeight: FontWeight.w500, color: ConstColors.lightTextBody),
   );
 
   static TextTheme darkTextTheme = TextTheme(

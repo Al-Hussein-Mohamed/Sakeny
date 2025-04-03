@@ -1,40 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sakeny/core/config/page_route_name.dart';
+import 'package:sakeny/features/home/screens/home_screen.dart';
+import 'package:sakeny/features/register/screens/register_screen.dart';
 
+import '../../features/login/controllers/login_cubit.dart';
 import '../../features/login/screens/login_screen.dart';
+import '../../features/onboarding/controllers/onboarding_cubit.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
+import '../../features/register/controllers/register_cubit.dart';
 
 class PageRouter {
-  static  Route<dynamic> onGenerateRoute(RouteSettings settings){
-    switch (settings.name){
+  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    switch (settings.name) {
       case PageRouteNames.onboarding:
-        return PageRouteBuilder(
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => OnboardingCubit(),
+            child: const OnboardingScreen(),
+          ),
           settings: settings,
-          transitionDuration: const Duration(milliseconds: 400), // Custom duration
-          pageBuilder: (context, animation, secondaryAnimation) => const OnboardingScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            // Example: Fade transition with Hero animations working automatically
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
         );
 
       case PageRouteNames.login:
-        return PageRouteBuilder(
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => LoginCubit(),
+            child: const LoginScreen(),
+          ),
           settings: settings,
-          transitionDuration: const Duration(milliseconds: 400), // Custom duration
-          pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            // Example: Fade transition with Hero animations working automatically
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
         );
 
+      case PageRouteNames.register:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => RegisterCubit(),
+            child: const RegisterScreen(),
+          ),
+          settings: settings,
+        );
+
+      case PageRouteNames.home:
+        return MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+          settings: settings,
+        );
 
       default:
         return MaterialPageRoute(

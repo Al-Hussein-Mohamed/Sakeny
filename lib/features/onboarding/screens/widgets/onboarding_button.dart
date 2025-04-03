@@ -26,7 +26,7 @@ class OnboardingButton extends StatelessWidget {
         return Hero(
           tag: "auth-button",
           child: Padding(
-            padding: EdgeInsets.all(12.h),
+            padding: EdgeInsets.all(18.r),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeInOut,
