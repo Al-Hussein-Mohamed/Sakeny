@@ -1,10 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sakeny/features/home/screens/widget/search_bar_widget.dart';
+import 'package:sakeny/features/home/screens/widget/title_widget.dart';
+
+import '../../../utils/constants/const_images.dart';
+import '../../../utils/constants/const_text.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Text("home screen", style: TextStyle(fontSize: 50),);
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(18.r),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 15.h),
+
+
+              // title
+              TitleWidget(),
+
+              SizedBox(height: 30.h),
+
+              // Search bar
+              SearchBarWidget(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
+
+

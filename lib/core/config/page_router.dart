@@ -14,7 +14,7 @@ class PageRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case PageRouteNames.onboarding:
-        return MaterialPageRoute(
+        return CustomMaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => OnboardingCubit(),
             child: const OnboardingScreen(),
@@ -23,7 +23,7 @@ class PageRouter {
         );
 
       case PageRouteNames.login:
-        return MaterialPageRoute(
+        return CustomMaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => LoginCubit(),
             child: const LoginScreen(),
@@ -32,7 +32,7 @@ class PageRouter {
         );
 
       case PageRouteNames.register:
-        return MaterialPageRoute(
+        return CustomMaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => RegisterCubit(),
             child: const RegisterScreen(),
@@ -41,16 +41,34 @@ class PageRouter {
         );
 
       case PageRouteNames.home:
-        return MaterialPageRoute(
+        return CustomMaterialPageRoute(
           builder: (context) => const HomeScreen(),
           settings: settings,
         );
 
       default:
-        return MaterialPageRoute(
-          builder: (context) => const Placeholder(),
+        return CustomMaterialPageRoute(
+          builder: (context) => const LoginScreen(),
           settings: settings,
         );
     }
   }
+}
+
+class CustomMaterialPageRoute<T> extends MaterialPageRoute<T> {
+  final Duration customTransitionDuration;
+  final Duration customReverseTransitionDuration;
+
+  CustomMaterialPageRoute({
+    required super.builder,
+    required RouteSettings settings,
+    this.customTransitionDuration = const Duration(milliseconds: 500),
+    this.customReverseTransitionDuration = const Duration(milliseconds: 500),
+  });
+
+  @override
+  Duration get transitionDuration => customTransitionDuration;
+
+  @override
+  Duration get reverseTransitionDuration => customReverseTransitionDuration;
 }

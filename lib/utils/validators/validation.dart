@@ -58,5 +58,13 @@ class Validator {
     return null;
   }
 
-// Add more custom validators as needed for your specific requirements.
+  static String? validateName(String? value){
+    value = value?.trim();
+    if (value == null || value.isEmpty) {
+      return 'Name is required.';
+    }
+
+    return null;
+  }
+
 }

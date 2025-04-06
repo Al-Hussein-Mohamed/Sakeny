@@ -15,5 +15,9 @@ class ConstImages{
   static const String facebookIcon = "assets/icons/facebook.png";
   static const String microsoftIcon = "assets/icons/microsoft.png";
 
+  // home images
+  static const String searchLogo = "assets/icons/search.svg";
+  static const String searchSettings = "assets/icons/search_settings.svg";
+
 
 }

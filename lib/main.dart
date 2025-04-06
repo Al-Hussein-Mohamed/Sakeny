@@ -12,6 +12,13 @@ import 'core/config/page_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // or a visible color
+      statusBarIconBrightness: Brightness.dark, // or Brightness.light
+    ),
+  );
+
   await ScreenUtil.ensureScreenSize();
 
   serviceLocatorSetup();
@@ -50,7 +57,6 @@ class Sakeny extends StatelessWidget {
           themeMode: ThemeMode.light,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-
           initialRoute: PageRouteNames.onboarding,
           onGenerateRoute: PageRouter.onGenerateRoute,
         );

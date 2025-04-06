@@ -17,6 +17,7 @@ dependencies:
   device_preview:
   flutter_screenutil:
   animated_custom_dropdown:
+  flutter_svg: ^2.0.17
 
   # Icons
   cupertino_icons: ^1.0.8

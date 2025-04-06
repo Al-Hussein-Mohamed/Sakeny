@@ -13,11 +13,12 @@ class LanguageDropdown extends StatelessWidget {
     return SizedBox(
       width: 180.r,
       child: CustomDropdown(
+        // hintText: "Language",
         closedHeaderPadding: EdgeInsets.all(12.r),
         itemsListPadding: EdgeInsets.all(8.r),
         listItemPadding: EdgeInsets.all(8.r),
         decoration: CustomDropdownDecoration(
-          closedBorder: Border.all(color: Colors.white),
+          closedBorder: Border.all(color: Colors.white, width: 2.h),
           closedBorderRadius: BorderRadius.circular(10.r),
           closedShadow: [
             const BoxShadow(

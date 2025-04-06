@@ -31,7 +31,13 @@ class ConstText {
   static const String lastName = "Last Name";
   static const String phoneNumber = "Phone Number";
   static const String confirmPassword = "Confirm Password";
-  static const String signUp = "Sign Up";
+  static const String location = "Location";
+  static const String create = "Create";
   static const String alreadyHaveAccount = "Already have an account? Sign In";
+
+  // Home text
+  static const String homeTitle1 = "Find Your ";
+  static const String homeTitle2 = "Best place to stay";
+  static const String searchHint = "Search...";
 
 }
