@@ -1,0 +1,1 @@
+D:\Flutter\Projects\Sakeny\build\app\intermediates\cxx\RelWithDebInfo\6w2w281f\obj\arm64-v8a

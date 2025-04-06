@@ -9,6 +9,7 @@ class ConstColors{
   // Light Theme Colors
   static const Color lightTextTitle = Color(0xFF253439);
   static const Color lightTextBody = Color(0xFF3D555D);
+  static const Color drawerButton = Color(0xFF435D66);
 
   // input field colors
   static const Color lightInputField = Color(0xFF253439);

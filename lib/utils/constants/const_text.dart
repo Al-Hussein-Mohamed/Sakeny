@@ -40,4 +40,14 @@ class ConstText {
   static const String homeTitle2 = "Best place to stay";
   static const String searchHint = "Search...";
 
+  // drawer text
+  static const String drawerMyProfile = "My Profile";
+  static const String drawerHome = "Home";
+  static const String drawerChat = "Chats";
+  static const String drawerFavorites = "Favorites";
+  static const String drawerNotification = "Notifications";
+  static const String drawerFilters = "Filters";
+  static const String drawerAddEstate = "Add Real Estate";
+  static const String drawerLanguage = "Language";
+  static const String drawerLogout = "Logout";
 }

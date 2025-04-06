@@ -1,0 +1,14 @@
+import "package:flutter/material.dart";
+import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
+
+part 'home_state.dart';
+
+class HomeCubit extends Cubit<HomeState> {
+  HomeCubit() : super(HomeInitial());
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  void asdf(){
+    // scaffoldKey.currentState?;
+  }
+}

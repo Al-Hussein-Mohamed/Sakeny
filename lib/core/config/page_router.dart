@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sakeny/core/config/page_route_name.dart';
+import 'package:sakeny/features/home/controllers/home_cubit.dart';
 import 'package:sakeny/features/home/screens/home_screen.dart';
 import 'package:sakeny/features/register/screens/register_screen.dart';
 
@@ -42,7 +43,10 @@ class PageRouter {
 
       case PageRouteNames.home:
         return CustomMaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => BlocProvider(
+            create: (context) => HomeCubit(),
+            child: HomeScreen(),
+          ),
           settings: settings,
         );
 
