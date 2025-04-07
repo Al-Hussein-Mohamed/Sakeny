@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.10"
+  animated_toggle_switch:
+    dependency: "direct main"
+    description:
+      name: animated_toggle_switch
+      sha256: f2e021b1bbbaa76c664b29f6932ed9a37fbd75870da19053a0cc6cd9f790d83a
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.4"
   ansicolor:
     dependency: transitive
     description:
@@ -154,7 +162,7 @@ packages:
     source: hosted
     version: "7.0.1"
   flutter:
-    dependency: transitive
+    dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -414,7 +422,7 @@ packages:
     source: hosted
     version: "6.0.1"
   provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: provider
       sha256: "489024f942069c2920c844ee18bb3d467c69e48955a4f32d1677f71be103e310"

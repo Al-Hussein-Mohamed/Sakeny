@@ -27,7 +27,7 @@ class SearchBarWidget extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: SvgPicture.asset(ConstImages.searchLogo),
             ),
-            suffixIcon: InkWell(
+            suffixIcon: GestureDetector(
               onTap: ()=> print("searchFilter"),
               child: Container(
                 margin: EdgeInsets.only(right: 6.5, left: 3.5 ,top: 5.5, bottom: 2.5),
