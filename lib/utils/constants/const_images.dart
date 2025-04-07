@@ -21,6 +21,8 @@ class ConstImages{
 
   // drawer icons
   static const String drawerIcon = "assets/icons/drawer/drawer_icon.svg";
+  static const String drawerIconPng = "assets/icons/drawer/drawer_icon.png";
+
   static const String drawerClose = "assets/icons/drawer/close_drawer_icon.svg";
   static const String drawerEditProfile = "assets/icons/drawer/drawer_edit_profile_icon.svg";
   static const String drawerAddEstate = "assets/icons/drawer/drawer_add_estate.svg";
@@ -32,4 +34,6 @@ class ConstImages{
   static const String drawerLogout = "assets/icons/drawer/drawer_logout.svg";
   static const String drawerMyProfile = "assets/icons/drawer/drawer_my_profile.svg";
   static const String drawerNotification = "assets/icons/drawer/drawer_notification.svg";
+  static const String drawerSun = "assets/icons/drawer/drawer_sun.svg";
+  static const String drawerMoon = "assets/icons/drawer/drawer_moon.svg";
 }

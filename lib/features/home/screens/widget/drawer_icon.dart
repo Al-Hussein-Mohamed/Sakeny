@@ -32,7 +32,8 @@ class DrawerIcon extends StatelessWidget {
               bottomLeft: Radius.circular(10.r),
             ),
           ),
-          child: SvgPicture.asset(ConstImages.drawerIcon),
+          // child: SvgPicture.asset(ConstImages.drawerIcon),
+          child: Image.asset(ConstImages.drawerIconPng),
         ),
       ),
     );
