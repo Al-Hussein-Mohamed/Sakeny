@@ -14,6 +14,8 @@ dependencies:
     sdk: flutter
 
   # Utility Packages
+  dio: ^5.8.0+1
+  logger: ^2.5.0
   intl:
   flutter_native_splash:
   smooth_page_indicator:
@@ -23,6 +25,7 @@ dependencies:
   flutter_svg: ^2.0.17
   animated_theme_switcher: ^2.0.10
   animated_toggle_switch: ^0.8.4
+  dartz: ^0.10.1
 
   # Icons
   cupertino_icons: ^1.0.8

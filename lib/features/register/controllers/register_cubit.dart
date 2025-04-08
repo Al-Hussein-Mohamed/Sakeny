@@ -2,8 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import "package:flutter/material.dart";
+import 'package:sakeny/core/services/api_auth_services.dart';
 
 import '../../../utils/validators/validation.dart';
+import '../models/register_req_params.dart';
 
 part 'register_state.dart';
 
@@ -30,6 +32,35 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController confirmPasswordController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
+
+  void register() {
+    if (formKey.currentState!.validate()) {
+      emit(RegisterLoading());
+      ApiAuthServices.register(
+        registerReqParams: RegisterReqParams(
+          firstName: firstNameController.text,
+          secondName: lastNameController.text,
+          email: emailController.text,
+          phoneNumber: phoneNumberController.text,
+          password: passwordController.text,
+          confirmPassword: confirmPasswordController.text,
+          longitude: 0,
+          latitude: 0,
+        ),
+      ).then((response) {
+        response.fold(
+          (error) {
+            emit(RegisterFailed(errorMessage: error));
+          },
+          (data) {
+            emit(RegisterSuccess());
+          },
+        );
+      });
+    } else {
+      emit(RegisterFailed());
+    }
+  }
 
   void togglePasswordVisibility() {
     isPasswordObscure = !isPasswordObscure;
@@ -62,12 +93,22 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   String? passwordValidator(String? value) {
+    if(passwordController.text != confirmPasswordController.text){
+      isPasswordValid = false;
+      return "passwords do not match";
+    }
+
     String? res = Validator.validatePassword(value);
     isPasswordValid = (res == null);
     return res;
   }
 
   String? confirmPasswordValidator(String? value) {
+    if(passwordController.text != confirmPasswordController.text){
+      isConfirmPasswordValid = false;
+      return "passwords do not match";
+    }
+
     String? res = Validator.validatePassword(value);
     isConfirmPasswordValid = (res == null);
     return res;
@@ -77,17 +118,5 @@ class RegisterCubit extends Cubit<RegisterState> {
     String? res = Validator.validatePhoneNumber(value);
     isPhoneNumberValid = (res == null);
     return res;
-  }
-
-  void register() {
-    // if (formKey.currentState!.validate()) {
-    //   emit(RegisterLoading());
-    //   // Perform registration logic here
-    //   // If successful, emit RegisterSuccess
-    //   // If failed, emit RegisterFailed
-    // } else {
-    //   emit(RegisterFailed());
-    // }
-    emit(RegisterSuccess());
   }
 }

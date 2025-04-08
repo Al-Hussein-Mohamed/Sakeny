@@ -21,7 +21,7 @@ class PasswordTextField extends StatelessWidget {
     required this.isPasswordObscure,
     required this.isPasswordValid,
     required this.passwordController,
-    required this.passwordValidator,
+    this.passwordValidator,
     required this.onPasswordVisibilityToggle,
     this.textInputAction = TextInputAction.next,
   });

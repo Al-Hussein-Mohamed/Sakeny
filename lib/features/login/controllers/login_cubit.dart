@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
+import 'package:sakeny/features/login/models/sign_in_params.dart';
 
+import '../../../core/services/api_auth_services.dart';
 import '../../../utils/validators/validation.dart';
 
 part 'login_state.dart';
@@ -19,13 +21,13 @@ class LoginCubit extends Cubit<LoginState> {
   final TextEditingController passwordController = TextEditingController();
 
   String? emailValidator(String? value) {
-    String? res =  Validator.validateEmail(value);
+    String? res = Validator.validateEmail(value);
     isEmailValid = (res == null);
     return res;
   }
 
-  String? passwordValidator(String? value){
-    String? res =  Validator.validatePassword(value);
+  String? passwordValidator(String? value) {
+    String? res = Validator.validatePassword(value);
     isPasswordValid = (res == null);
     return res;
   }
@@ -44,13 +46,24 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginInitial());
   }
 
-  void signIn(){
+  void signIn() {
     if (formKey.currentState!.validate()) {
       emit(LoginLoading());
-
+      ApiAuthServices.signIn(
+        signInParams: SignInParams(
+          email: emailController.text,
+          password: passwordController.text,
+          rememberMe: false,
+        ),
+      ).then((res) {
+        res.fold((error) {
+          emit(LoginFailed(errorMessage: error));
+        }, (data) {
+          emit(LoginSuccess());
+        });
+      });
     } else {
       emit(LoginFailed());
     }
-
   }
 }

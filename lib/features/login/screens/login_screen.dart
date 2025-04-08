@@ -26,14 +26,33 @@ class LoginScreen extends StatelessWidget {
         child: Form(
           key: loginCubit.formKey,
           child: LayoutBuilder(
-            builder: (context, constraints) => SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: BlocBuilder<LoginCubit, LoginState>(
-                  builder: (context, state) => LoginBody(),
+            builder: (context, constraints) =>
+                SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                    child: BlocConsumer<LoginCubit, LoginState>(
+                      listener: (context, state) {
+                        if(state is LoginSuccess){
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            PageRouteNames.home,
+                            (route) => false,
+                          );
+                        } else if (state is LoginFailed) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(state.errorMessage),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      },
+                      builder: (context, state) {
+                        return LoginBody();
+                      },
+                    ),
+                  ),
                 ),
-              ),
-            ),
           ),
         ),
       ),
@@ -78,7 +97,6 @@ class LoginBody extends StatelessWidget {
               isPasswordObscure: loginCubit.isPasswordObscure,
               isPasswordValid: loginCubit.isPasswordValid,
               passwordController: loginCubit.passwordController,
-              passwordValidator: loginCubit.passwordValidator,
               onPasswordVisibilityToggle: loginCubit.togglePasswordVisibility,
             ),
 
@@ -117,7 +135,7 @@ class LoginBody extends StatelessWidget {
               padding: EdgeInsets.all(12.r),
               child: Row(
                 children:
-                    signInCards.map((card) => SignInCardWidget(signInCardModel: card)).toList(),
+                signInCards.map((card) => SignInCardWidget(signInCardModel: card)).toList(),
               ),
             ),
 

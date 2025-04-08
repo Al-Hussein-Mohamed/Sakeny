@@ -22,20 +22,33 @@ class RegisterScreen extends StatelessWidget {
       body: SafeArea(
         child: Form(
           key: registerCubit.formKey,
-          child: SingleChildScrollView(
-            child: BlocConsumer<RegisterCubit, RegisterState>(
-              listener: (context, state) {
-                if(state is RegisterSuccess){
-                  Navigator.pop(context, {
-                    'email': registerCubit.emailController.text,
-                    'password': registerCubit.passwordController.text,
-                  });
-                }
-              },
-              builder: (context, state) {
-                return RegisterBody();
-              },
-            ),
+          child: BlocConsumer<RegisterCubit, RegisterState>(
+            listener: (context, state) {
+              if (state is RegisterSuccess) {
+                Navigator.pop(context, {
+                  'email': registerCubit.emailController.text,
+                  'password': registerCubit.passwordController.text,
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Account created successfully"),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              } else if (state is RegisterFailed) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.errorMessage),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              return SingleChildScrollView(
+                child: RegisterBody(),
+              );
+            },
           ),
         ),
       ),
@@ -125,18 +138,15 @@ class RegisterBody extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20.r, vertical: 14.r),
           label: ConstText.location,
           isPhoneValid: registerCubit.isPhoneNumberValid,
-          phoneValidator: registerCubit.phoneNumberValidator,
+          phoneValidator: registerCubit.firstNameValidator,
         ),
 
         // Register button
-        Hero(
-          tag: "auth-button",
-          child: Padding(
-            padding: EdgeInsets.all(18.r),
-            child: ElevatedButton(
-              onPressed: registerCubit.register,
-              child: Text(ConstText.create),
-            ),
+        Padding(
+          padding: EdgeInsets.all(18.r),
+          child: ElevatedButton(
+            onPressed: registerCubit.register,
+            child: Text(ConstText.create),
           ),
         ),
       ],
