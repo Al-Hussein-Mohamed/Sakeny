@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sakeny/utils/theme/widget_themes/custom_app_bar_theme.dart';
 import 'package:sakeny/utils/theme/widget_themes/custom_color_scheme.dart';
 import 'package:sakeny/utils/theme/widget_themes/custom_elevated_button_theme.dart';
 import 'package:sakeny/utils/theme/widget_themes/custom_icon_theme.dart';
@@ -18,6 +19,7 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.white,
     iconTheme: CustomIconTheme.lightIconTheme,
     textTheme: CustomTextTheme.lightTextTheme,
+    appBarTheme: CustomAppBarTheme.lightAppBarTheme,
     colorScheme: CustomColorScheme.lightColorScheme,
     inputDecorationTheme: CustomTextFieldTheme.lightInputDecorationTheme,
     elevatedButtonTheme: CustomElevatedButtonTheme.lightElevatedButtonTheme,
@@ -30,6 +32,7 @@ class AppTheme {
     primaryColor: ConstColors.primaryColor,
     iconTheme: CustomIconTheme.darkIconTheme,
     textTheme: CustomTextTheme.darkTextTheme,
+    appBarTheme: CustomAppBarTheme.darkAppBarTheme,
     colorScheme: CustomColorScheme.darkColorScheme,
     scaffoldBackgroundColor: ConstColors.primaryColor,
     inputDecorationTheme: CustomTextFieldTheme.darkInputDecorationTheme,

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sakeny/common/widgets/custom_pop_scope.dart';
 import 'package:sakeny/common/widgets/text_fields/email_text_field.dart';
+import 'package:sakeny/core/services/snack_bar/snack_bar_service.dart';
 import 'package:sakeny/features/login/screens/widgets/sign_in_card_widget.dart';
 
 import '../../../common/widgets/text_fields/password_text_field.dart';
 import '../../../common/widgets/top_bar_language.dart';
-import '../../../core/config/page_route_name.dart';
+import '../../../core/routing/page_route_name.dart';
 import '../../../utils/constants/const_colors.dart';
 import '../../../utils/constants/const_images.dart';
 import '../../../utils/constants/const_text.dart';
@@ -17,42 +20,57 @@ import '../models/sing_in_card_model.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
-    LoginCubit loginCubit = context.read<LoginCubit>();
+    final route = ModalRoute.of(context);
+    final args = route?.settings.arguments;
 
-    return Scaffold(
-      body: SafeArea(
-        child: Form(
-          key: loginCubit.formKey,
-          child: LayoutBuilder(
-            builder: (context, constraints) =>
-                SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                    child: BlocConsumer<LoginCubit, LoginState>(
-                      listener: (context, state) {
-                        if(state is LoginSuccess){
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            PageRouteNames.home,
-                            (route) => false,
-                          );
-                        } else if (state is LoginFailed) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(state.errorMessage),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        }
-                      },
-                      builder: (context, state) {
-                        return LoginBody();
-                      },
+    String? email;
+    String? password;
+
+    if (args != null && args is Map<String, String>) {
+      email = args["email"];
+      password = args["password"];
+    }
+
+    final LoginCubit loginCubit = context.read<LoginCubit>()..setEmailAndPassword(email, password);
+    final theme = Theme.of(context);
+    return CustomPopScope(
+      nextRoute: PageRouteNames.onboarding,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: theme.scaffoldBackgroundColor,
+          toolbarHeight: 0,
+        ),
+        body: SafeArea(
+          child: Form(
+            key: loginCubit.formKey,
+            child: LayoutBuilder(
+              builder: (context, constraints) =>
+                  SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                      child: BlocConsumer<LoginCubit, LoginState>(
+                        listener: (context, state) {
+                          if(state is LoginSuccess){
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              PageRouteNames.home,
+                              (route) => false,
+                            );
+                          } else if (state is LoginFailed) {
+                            SnackBarService.showError(context, state.errorMessage);
+                          }
+                        },
+                        builder: (context, state) {
+                          return LoginBody();
+                        },
+                      ),
                     ),
                   ),
-                ),
+            ),
           ),
         ),
       ),
@@ -73,12 +91,12 @@ class LoginBody extends StatelessWidget {
         Column(
           children: [
             // Top bar with language selection
-            TopBarLanguage(function: () => Navigator.pop(context)),
+            TopBarLanguage(function: () => loginCubit.goToOnboarding(context)),
 
             SizedBox(height: 50.h),
 
             // Title
-            TitleWidget(),
+            const TitleWidget(),
 
             SizedBox(height: 22.h),
 
@@ -97,6 +115,7 @@ class LoginBody extends StatelessWidget {
               isPasswordObscure: loginCubit.isPasswordObscure,
               isPasswordValid: loginCubit.isPasswordValid,
               passwordController: loginCubit.passwordController,
+              passwordValidator: loginCubit.passwordValidator,
               onPasswordVisibilityToggle: loginCubit.togglePasswordVisibility,
             ),
 
@@ -114,7 +133,7 @@ class LoginBody extends StatelessWidget {
 
             // Login button
             Hero(
-              tag: "auth-button",
+              tag: "button",
               child: Padding(
                 padding: EdgeInsets.all(18.r),
                 child: ElevatedButton(
@@ -141,18 +160,7 @@ class LoginBody extends StatelessWidget {
 
             // create account
             GestureDetector(
-              onTap: () async {
-                // Navigator.pushNamed(context, PageRouteNames.register, arguments: {
-                //   "emailController": loginCubit.emailController,
-                //   "passwordController": loginCubit.passwordController,
-                // });
-                final result = await Navigator.pushNamed(context, PageRouteNames.register);
-                if (result != null && result is Map<String, dynamic>) {
-                  final email = result['email'] as String;
-                  final password = result['password'] as String;
-                  loginCubit.setEmailAndPassword(email, password);
-                }
-              },
+              onTap: () => loginCubit.goToRegister(context),
               child: Padding(
                 padding: EdgeInsets.all(12.r),
                 child: Text(ConstText.createAccount,
@@ -162,7 +170,7 @@ class LoginBody extends StatelessWidget {
           ],
         ),
         GestureDetector(
-          onTap: () => _goToHome(context),
+          onTap: () => loginCubit.goToHome(context),
           child: Padding(
             padding: EdgeInsets.all(18.r),
             child: Row(
@@ -184,14 +192,6 @@ class LoginBody extends StatelessWidget {
     );
   }
 
-  void _goToHome(BuildContext context) {
-    Navigator.pushNamed(context, PageRouteNames.home);
-    // Navigator.pushNamedAndRemoveUntil(
-    //   context,
-    //   PageRouteNames.home,
-    //   (route) => false,
-    // );
-  }
 }
 
 class TitleWidget extends StatelessWidget {

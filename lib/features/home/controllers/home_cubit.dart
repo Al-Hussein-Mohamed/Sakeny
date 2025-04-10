@@ -8,7 +8,6 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  void asdf(){
-    // scaffoldKey.currentState?;
-  }
+
+
 }

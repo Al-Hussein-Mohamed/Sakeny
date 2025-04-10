@@ -26,6 +26,7 @@ dependencies:
   animated_theme_switcher: ^2.0.10
   animated_toggle_switch: ^0.8.4
   dartz: ^0.10.1
+  flutter_easyloading: ^3.0.5
 
   # Icons
   cupertino_icons: ^1.0.8

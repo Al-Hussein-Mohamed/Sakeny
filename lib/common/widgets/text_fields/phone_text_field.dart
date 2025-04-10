@@ -27,7 +27,7 @@ class PhoneTextField extends StatelessWidget {
       child: TextFormField(
         controller: phoneController,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.phone_outlined, size: 28.spMin, color: color),
+          prefixIcon: Icon(Icons.phone_outlined, size: 24, color: color),
           label: Text(
             label,
             style: TextStyle().copyWith(color: color),

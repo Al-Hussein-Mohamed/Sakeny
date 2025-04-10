@@ -21,13 +21,13 @@ class NameTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = isNameValid ? ConstColors.lightInputField : ConstColors.lightWrongInputField;
+    final Color color = isNameValid ? ConstColors.lightInputField : ConstColors.lightWrongInputField;
     return Padding(
       padding: padding,
       child: TextFormField(
         controller: nameController,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.person_outline_rounded, size: 28.spMin, color: color),
+          prefixIcon: Icon(Icons.person_outline_rounded, size: 24, color: color),
           label: Text(
             label,
             style: TextStyle().copyWith(color: color),

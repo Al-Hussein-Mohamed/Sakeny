@@ -52,7 +52,7 @@ class Validator {
     final phoneRegExp = RegExp(r'^\d{11}$');
 
     if (!phoneRegExp.hasMatch(value)) {
-      return 'Invalid phone number format (10 digits required).';
+      return 'Invalid phone number format (11 digits required).';
     }
 
     return null;
@@ -62,6 +62,15 @@ class Validator {
     value = value?.trim();
     if (value == null || value.isEmpty) {
       return 'Name is required.';
+    }
+
+    return null;
+  }
+
+  static String? validateLoginPassword(String? value){
+    value = value?.trim();
+    if (value == null || value.isEmpty) {
+      return 'password is required.';
     }
 
     return null;

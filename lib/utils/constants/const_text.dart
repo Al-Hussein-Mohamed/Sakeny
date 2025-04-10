@@ -50,4 +50,22 @@ class ConstText {
   static const String drawerAddEstate = "Add Real Estate";
   static const String drawerLanguage = "Language";
   static const String drawerLogout = "Logout";
+
+  // profile text
+  static const String profileTitle = "My Profile";
+  static const String profileEdit = "Edit Profile";
+  static const String save = "Save";
+  static const String changePassword = "Change Password";
+
+  static const String logout = "Logout";
+  static const String logoutMessage = "Are you sure you want to logout?";
+  static const String cancel = "Cancel";
+  static const String yes = "Yes";
+
+  // exit dialog
+  static const String exitApp = "Exit App";
+  static const String exitMessage = "Are you sure you want to exit?";
+  static const String exit = "Exit";
+  static const String cancelExit = "Cancel";
+
 }

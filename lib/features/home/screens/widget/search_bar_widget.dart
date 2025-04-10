@@ -15,7 +15,7 @@ class SearchBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Hero(
-      tag: "auth-button",
+      tag: "button",
       child: Material(
         elevation: 5.0,
         borderRadius: BorderRadius.circular(10.r),

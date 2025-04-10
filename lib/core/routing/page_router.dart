@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sakeny/core/config/page_route_name.dart';
+import 'package:sakeny/core/routing/page_route_name.dart';
 import 'package:sakeny/features/home/controllers/home_cubit.dart';
 import 'package:sakeny/features/home/screens/home_screen.dart';
+import 'package:sakeny/features/profile/edit_profile/controllers/edit_profile_cubit.dart';
+import 'package:sakeny/features/profile/edit_profile/screens/edit_profile_screen.dart';
 import 'package:sakeny/features/register/screens/register_screen.dart';
 
 import '../../features/login/controllers/login_cubit.dart';
@@ -10,6 +12,7 @@ import '../../features/login/screens/login_screen.dart';
 import '../../features/onboarding/controllers/onboarding_cubit.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
 import '../../features/register/controllers/register_cubit.dart';
+import '../services/service_locator.dart';
 
 class PageRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -50,6 +53,15 @@ class PageRouter {
           settings: settings,
         );
 
+      case PageRouteNames.editProfile:
+        return CustomMaterialPageRoute(
+          builder: (context) => BlocProvider(
+              create: (context) => EditProfileCubit(),
+              child: EditProfileScreen(),
+            ),
+          settings: settings,
+        );
+
       default:
         return CustomMaterialPageRoute(
           builder: (context) => const LoginScreen(),
@@ -60,14 +72,15 @@ class PageRouter {
 }
 
 class CustomMaterialPageRoute<T> extends MaterialPageRoute<T> {
+  static const int customDuration = 450;
   final Duration customTransitionDuration;
   final Duration customReverseTransitionDuration;
 
   CustomMaterialPageRoute({
     required super.builder,
-    required RouteSettings settings,
-    this.customTransitionDuration = const Duration(milliseconds: 500),
-    this.customReverseTransitionDuration = const Duration(milliseconds: 500),
+    required super.settings,
+    this.customTransitionDuration = const Duration(milliseconds: customDuration),
+    this.customReverseTransitionDuration = const Duration(milliseconds: customDuration),
   });
 
   @override

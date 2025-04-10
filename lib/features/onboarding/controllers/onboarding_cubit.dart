@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-import '../../../core/config/page_route_name.dart';
+import '../../../core/routing/page_route_name.dart';
 import '../../../utils/constants/const_images.dart';
 import '../../../utils/constants/const_text.dart';
 import '../models/onboarding_model.dart';
@@ -38,14 +38,9 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   }
 
   void exit(BuildContext context) {
-    Navigator.pushNamed(
+    Navigator.pushReplacementNamed(
       context,
       PageRouteNames.login,
     );
-
-    Future.delayed(const Duration(milliseconds: 500), () {
-      currentPage = 0;
-      pageController.jumpToPage(currentPage);
-    });
   }
 }

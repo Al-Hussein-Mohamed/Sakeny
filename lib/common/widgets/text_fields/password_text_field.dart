@@ -38,7 +38,7 @@ class PasswordTextField extends StatelessWidget {
           child: TextFormField(
             controller: passwordController,
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.lock_outline, size: 28.spMin, color: color),
+              prefixIcon: Icon(Icons.lock_outline, size: 24, color: color),
               suffixIcon: IconButton(
                 icon: Icon(
                   isPasswordObscure ? Icons.visibility_off : Icons.visibility,

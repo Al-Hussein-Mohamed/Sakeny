@@ -30,7 +30,7 @@ class EmailTextField extends StatelessWidget {
           child: TextFormField(
             controller: emailController,
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.email_outlined, size: 28.spMin, color: color),
+              prefixIcon: Icon(Icons.email_outlined, size: 24, color: color),
               label: Text(
                 ConstText.email,
                 style: TextStyle().copyWith(color: color),

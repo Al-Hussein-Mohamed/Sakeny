@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/config/page_route_name.dart';
+import '../../../../core/routing/page_route_name.dart';
 import '../../../../utils/constants/const_colors.dart';
 import '../../../../utils/constants/const_text.dart';
 import '../../controllers/onboarding_cubit.dart';
@@ -24,7 +24,7 @@ class OnboardingButton extends StatelessWidget {
             isLastPage ? ConstText.onboardingButtonText2 : ConstText.onboardingButtonText1;
 
         return Hero(
-          tag: "auth-button",
+          tag: "button",
           child: Padding(
             padding: EdgeInsets.all(18.r),
             child: AnimatedContainer(

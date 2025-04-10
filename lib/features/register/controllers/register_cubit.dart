@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:meta/meta.dart';
 import "package:flutter/material.dart";
+import 'package:sakeny/core/routing/page_route_name.dart';
 import 'package:sakeny/core/services/api_auth_services.dart';
 
 import '../../../utils/validators/validation.dart';
@@ -33,8 +35,25 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
 
+  void goToLogin(BuildContext context, {bool sendData = false}) {
+    Map<String, dynamic> args = {};
+    if(sendData){
+      args["email"] = emailController.text;
+      args["password"] = passwordController.text;
+    }
+    Navigator.pushReplacementNamed(context, PageRouteNames.login, arguments: args);
+  }
+
+  void goToLoginWithData(BuildContext context) {
+    Navigator.pushReplacementNamed(context, PageRouteNames.login, arguments: {
+      "email": emailController.text,
+      "password": passwordController.text,
+    });
+  }
+
   void register() {
     if (formKey.currentState!.validate()) {
+      EasyLoading.show();
       emit(RegisterLoading());
       ApiAuthServices.register(
         registerReqParams: RegisterReqParams(
@@ -50,15 +69,17 @@ class RegisterCubit extends Cubit<RegisterState> {
       ).then((response) {
         response.fold(
           (error) {
+            EasyLoading.dismiss();
             emit(RegisterFailed(errorMessage: error));
           },
           (data) {
+            EasyLoading.dismiss();
             emit(RegisterSuccess());
           },
         );
       });
     } else {
-      emit(RegisterFailed());
+      emit(RegisterInitial());
     }
   }
 
@@ -93,7 +114,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   String? passwordValidator(String? value) {
-    if(passwordController.text != confirmPasswordController.text){
+    if (passwordController.text != confirmPasswordController.text) {
       isPasswordValid = false;
       return "passwords do not match";
     }
@@ -104,7 +125,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   String? confirmPasswordValidator(String? value) {
-    if(passwordController.text != confirmPasswordController.text){
+    if (passwordController.text != confirmPasswordController.text) {
       isConfirmPasswordValid = false;
       return "passwords do not match";
     }
