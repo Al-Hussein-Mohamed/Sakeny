@@ -11,12 +11,11 @@ class OnboardingCustomPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          onboardingModel.image,
-          width: 300.w,
-        ),
+        Image.asset(onboardingModel.image, width: 300.w),
         SizedBox(height: 10.h),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -34,8 +33,8 @@ class OnboardingCustomPage extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.r),
+        RPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Text(
             onboardingModel.description,
             textAlign: TextAlign.center,

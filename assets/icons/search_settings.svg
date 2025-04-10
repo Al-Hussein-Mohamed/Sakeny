@@ -3,8 +3,7 @@
     <g clip-path="url(#clip0_0_1)">
         <rect width="393" height="1142" transform="translate(-341 -178)" />
         <g filter="url(#filter0_d_0_1)">
-            <path d="M-326 -7C-326 -12.5228 -321.523 -17 -316 -17H26C31.5229 -17 36 -12.5228 36 -7V23C36 28.5228 31.5229 33 26 33H-316C-321.523 33 -326 28.5228 -326 23V-7Z"
-                 />
+            <path d="M-326 -7C-326 -12.5228 -321.523 -17 -316 -17H26C31.5229 -17 36 -12.5228 36 -7V23C36 28.5228 31.5229 33 26 33H-316C-321.523 33 -326 28.5228 -326 23V-7Z" />
         </g>
         <rect x="-9" y="-9" width="35" height="35" rx="10" />
         <path
@@ -12,16 +11,6 @@
             fill="#FEFEFE" />
     </g>
     <defs>
-        <filter id="filter0_d_0_1" x="-330" y="-17" width="370" height="58" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-            <feOffset dy="4" />
-            <feGaussianBlur stdDeviation="2" />
-            <feComposite in2="hardAlpha" operator="out" />
-            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1" />
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape" />
-        </filter>
         <clipPath id="clip0_0_1">
             <rect width="393" height="1142" fill="white" transform="translate(-341 -178)" />
         </clipPath>

@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:sakeny/core/services/service_locator.dart';
 import 'package:sakeny/core/settings_provider.dart';
 import 'package:sakeny/features/onboarding/screens/onboarding_screen.dart';
+import 'package:sakeny/utils/helpers/herlpers.dart';
 import 'package:sakeny/utils/observers/bloc_observer.dart';
 import 'package:sakeny/utils/theme/theme.dart';
 
@@ -29,7 +30,8 @@ void main() async {
       designSize: const Size(393, 852),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (_, child) {
+      builder: (cont, child) {
+        loadAssets(cont);
         return ChangeNotifierProvider(
           create: (context) => SettingsProvider(),
           child: Sakeny(),

@@ -8,14 +8,11 @@ import 'package:sakeny/common/widgets/text_fields/email_text_field.dart';
 import 'package:sakeny/common/widgets/text_fields/name_text_field.dart';
 import 'package:sakeny/common/widgets/text_fields/phone_text_field.dart';
 import 'package:sakeny/core/routing/page_route_name.dart';
-import 'package:sakeny/core/services/service_locator.dart';
-import 'package:sakeny/features/drawer/screens/custom_drawer.dart';
 import 'package:sakeny/features/profile/edit_profile/controllers/edit_profile_cubit.dart';
 import 'package:sakeny/features/profile/edit_profile/screens/widget/change_password_button.dart';
 import 'package:sakeny/features/profile/edit_profile/screens/widget/profile_picture_widget.dart';
 import 'package:sakeny/features/profile/edit_profile/screens/widget/save_button.dart';
 import 'package:sakeny/utils/constants/const_text.dart';
-import 'package:sakeny/utils/validators/validation.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
@@ -30,16 +27,17 @@ class EditProfileScreen extends StatelessWidget {
         appBar: CustomAppBar.buildAppBar(
           context: context,
           title: ConstText.profileEdit,
-          openDrawer: () => editProfileCubit.scaffoldKey.currentState?.openEndDrawer(),
+          openDrawer: () =>
+              editProfileCubit.scaffoldKey.currentState?.openEndDrawer(),
         ),
         body: Form(
           key: editProfileCubit.formKey,
           child: BlocConsumer<EditProfileCubit, EditProfileState>(
-            listener: (context, state) {},
+            listener: (context, state) {
+              // Optional: handle state changes or error messages here.
+            },
             builder: (context, state) {
-              return SingleChildScrollView(
-                child: EditProfileBody(),
-              );
+              return const _EditProfileList();
             },
           ),
         ),
@@ -48,80 +46,69 @@ class EditProfileScreen extends StatelessWidget {
   }
 }
 
-class EditProfileBody extends StatelessWidget {
-  const EditProfileBody({super.key});
+class _EditProfileList extends StatelessWidget {
+  const _EditProfileList({super.key});
 
   @override
   Widget build(BuildContext context) {
     final EditProfileCubit editProfileCubit = context.read<EditProfileCubit>();
-    return Padding(
+    return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 18),
-      child: Column(
-        children: [
-          const SizedBox(height: 30),
-          // Profile Picture
-          const ProfilePictureWidget(),
+      children: [
+        const SizedBox(height: 30),
+        const RepaintBoundary(child: ProfilePictureWidget()),
+        const SizedBox(height: 30),
 
-          const SizedBox(height: 30),
-
-          // First Name Text Field
-          NameTextField(
-            padding: const EdgeInsets.all(5),
-            label: ConstText.firstName,
-            isNameValid: editProfileCubit.isFirstNameValid,
-            nameController: editProfileCubit.firstNameController,
-            nameValidator: editProfileCubit.firstNameValidator,
-          ),
-
-          // Last Name Text Field
-          const SizedBox(height: 15),
-          NameTextField(
-            padding: const EdgeInsets.all(5),
-            label: ConstText.lastName,
-            isNameValid: editProfileCubit.isLastNameValid,
-            nameController: editProfileCubit.lastNameController,
-            nameValidator: editProfileCubit.lastNameValidator,
-          ),
-
-          // phone number text field
-          const SizedBox(height: 15),
-          PhoneTextField(
-            padding: const EdgeInsets.all(5),
-            label: ConstText.phoneNumber,
-            isPhoneValid: editProfileCubit.isPhoneNumberValid,
-            phoneController: editProfileCubit.phoneNumberController,
-            phoneValidator: editProfileCubit.phoneNumberValidator,
-          ),
-
-          // Location Text Field
-          const SizedBox(height: 15),
-          SelectLocation(
-            padding: const EdgeInsets.all(5),
-            label: ConstText.location,
-            isPhoneValid: editProfileCubit.isPhoneNumberValid,
-            phoneValidator: editProfileCubit.firstNameValidator,
-          ),
-
-          // email text field
-          const SizedBox(height: 15),
-          EmailTextField(
-            padding: const EdgeInsets.all(5),
-            isEmailValid: editProfileCubit.isEmailValid,
-            emailController: editProfileCubit.emailController,
-            emailValidator: editProfileCubit.emailValidator,
-          ),
-
-          // change password button
-          const SizedBox(height: 15),
-          const ChangePasswordButton(),
-
-          // save button
-          const SizedBox(height: 10),
-          const SaveButton(),
-
-          const SizedBox(height: 18),
-        ],
-      ),
+        // First Name Text Field
+        NameTextField(
+          padding: const EdgeInsets.all(5),
+          label: ConstText.firstName,
+          isNameValid: editProfileCubit.isFirstNameValid,
+          nameController: editProfileCubit.firstNameController,
+          nameValidator: editProfileCubit.firstNameValidator,
+        ),
+        const SizedBox(height: 15),
+        // Last Name Text Field
+        NameTextField(
+          padding: const EdgeInsets.all(5),
+          label: ConstText.lastName,
+          isNameValid: editProfileCubit.isLastNameValid,
+          nameController: editProfileCubit.lastNameController,
+          nameValidator: editProfileCubit.lastNameValidator,
+        ),
+        const SizedBox(height: 15),
+        // Phone Number Text Field
+        PhoneTextField(
+          padding: const EdgeInsets.all(5),
+          label: ConstText.phoneNumber,
+          isPhoneValid: editProfileCubit.isPhoneNumberValid,
+          phoneController: editProfileCubit.phoneNumberController,
+          phoneValidator: editProfileCubit.phoneNumberValidator,
+        ),
+        const SizedBox(height: 15),
+        // Location Text Field
+        SelectLocation(
+          padding: const EdgeInsets.all(5),
+          label: ConstText.location,
+          isPhoneValid: editProfileCubit.isPhoneNumberValid,
+          phoneValidator: editProfileCubit.firstNameValidator,
+        ),
+        const SizedBox(height: 15),
+        // Email Text Field
+        EmailTextField(
+          padding: const EdgeInsets.all(5),
+          isEmailValid: editProfileCubit.isEmailValid,
+          emailController: editProfileCubit.emailController,
+          emailValidator: editProfileCubit.emailValidator,
+        ),
+        const SizedBox(height: 15),
+        // Change Password Button
+        const ChangePasswordButton(),
+        const SizedBox(height: 10),
+        // Save Button
+        const SaveButton(),
+        const SizedBox(height: 18),
+      ],
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../utils/constants/const_colors.dart';
 
 class PhoneTextField extends StatelessWidget {
@@ -21,13 +20,17 @@ class PhoneTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = isPhoneValid ? ConstColors.lightInputField : ConstColors.lightWrongInputField;
+    Color color = isPhoneValid
+        ? ConstColors.lightInputField
+        : ConstColors.lightWrongInputField;
     return Padding(
       padding: padding,
       child: TextFormField(
         controller: phoneController,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.phone_outlined, size: 24, color: color),
+          prefixIcon: RepaintBoundary(
+            child: Icon(Icons.phone_outlined, size: 24, color: color),
+          ),
           label: Text(
             label,
             style: TextStyle().copyWith(color: color),

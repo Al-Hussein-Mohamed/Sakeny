@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../utils/constants/const_colors.dart';
 import '../../../utils/constants/const_text.dart';
 
@@ -28,7 +27,9 @@ class PasswordTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = isPasswordValid ? ConstColors.lightInputField : ConstColors.lightWrongInputField;
+    Color color = isPasswordValid
+        ? ConstColors.lightInputField
+        : ConstColors.lightWrongInputField;
 
     return Hero(
       tag: label,
@@ -38,7 +39,9 @@ class PasswordTextField extends StatelessWidget {
           child: TextFormField(
             controller: passwordController,
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.lock_outline, size: 24, color: color),
+              prefixIcon: RepaintBoundary(
+                child: Icon(Icons.lock_outline, size: 24, color: color),
+              ),
               suffixIcon: IconButton(
                 icon: Icon(
                   isPasswordObscure ? Icons.visibility_off : Icons.visibility,
@@ -49,10 +52,7 @@ class PasswordTextField extends StatelessWidget {
               ),
               label: Text(label, style: TextStyle().copyWith(color: color)),
             ),
-
             textInputAction: textInputAction,
-
-            // TODO: modify this
             keyboardType: TextInputType.visiblePassword,
             autofillHints: [AutofillHints.password],
             obscureText: isPasswordObscure,

@@ -13,6 +13,7 @@ class ProfilePictureCustomWidget extends StatelessWidget {
     return Hero(
       tag: "img",
       child: FittedBox(
+        fit: BoxFit.scaleDown,
         child: Column(
           children: [
             Stack(

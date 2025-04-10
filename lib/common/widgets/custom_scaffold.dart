@@ -18,6 +18,7 @@ class CustomScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      behavior: HitTestBehavior.opaque,
       child: Scaffold(
         key: scaffoldKey,
         endDrawer: const CustomDrawer(),

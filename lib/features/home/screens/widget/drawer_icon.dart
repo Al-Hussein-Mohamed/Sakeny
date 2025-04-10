@@ -3,40 +3,49 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
 
-import "../../../../core/services/service_locator.dart";
 import "../../../../utils/constants/const_colors.dart";
 import "../../../../utils/constants/const_images.dart";
 import "../../controllers/home_cubit.dart";
 
 class DrawerIcon extends StatelessWidget {
-  const DrawerIcon({
-    super.key,
-  });
+  const DrawerIcon({super.key});
 
   @override
   Widget build(BuildContext context) {
     final homeCubit = context.read<HomeCubit>();
     return Positioned(
-      top: 50.h,
+      top: homeCubit.drawerIconTopOffset,
       right: 0,
-      child: Hero(
-        tag: "drawerIcon",
-        child: InkWell(
-          onTap: () => homeCubit.scaffoldKey.currentState?.openEndDrawer(),
-          child: Container(
-            width: 50,
-            height: 50,
-            padding: EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: ConstColors.primaryColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10.r),
-                bottomLeft: Radius.circular(10.r),
-              ),
+      child: Material(
+        elevation: 8,
+        color: ConstColors.primaryColor,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10.r),
+          bottomLeft: Radius.circular(10.r),
+        ),
+        child: Hero(
+          tag: "drawerIcon",
+          child: InkWell(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10.r),
+              bottomLeft: Radius.circular(10.r),
             ),
+            onTap: () => homeCubit.scaffoldKey.currentState?.openEndDrawer(),
+            child: Container(
+              width: 55.h,
+              height: 55.h,
+              padding: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.r),
+                  bottomLeft: Radius.circular(10.r),
+                ),
+              ),
 
-            child: SvgPicture.asset(ConstImages.drawerIcon),
-            // child: Image.asset(ConstImages.drawerIconPng),
+              child: SvgPicture.asset(ConstImages.drawerIcon),
+              // child: Image.asset(ConstImages.drawerIconPng),
+            ),
           ),
         ),
       ),

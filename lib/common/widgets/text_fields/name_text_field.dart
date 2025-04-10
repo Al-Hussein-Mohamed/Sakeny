@@ -1,7 +1,5 @@
-import "package:flutter/material.dart";
-import "package:flutter_screenutil/flutter_screenutil.dart";
-
-import "../../../utils/constants/const_colors.dart";
+import 'package:flutter/material.dart';
+import '../../../utils/constants/const_colors.dart';
 
 class NameTextField extends StatelessWidget {
   final EdgeInsetsGeometry padding;
@@ -21,13 +19,17 @@ class NameTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = isNameValid ? ConstColors.lightInputField : ConstColors.lightWrongInputField;
+    final Color color = isNameValid
+        ? ConstColors.lightInputField
+        : ConstColors.lightWrongInputField;
     return Padding(
       padding: padding,
       child: TextFormField(
         controller: nameController,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.person_outline_rounded, size: 24, color: color),
+          prefixIcon: RepaintBoundary(
+            child: Icon(Icons.person_outline_rounded, size: 24, color: color),
+          ),
           label: Text(
             label,
             style: TextStyle().copyWith(color: color),
