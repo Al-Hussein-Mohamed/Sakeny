@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sakeny/utils/validators/validation.dart';
 import '../../../utils/constants/const_colors.dart';
 import '../../../utils/constants/const_text.dart';
 
-class PasswordTextField extends StatelessWidget {
+class PasswordTextField extends StatefulWidget {
   final EdgeInsetsGeometry padding;
   final String label;
-  final bool isPasswordObscure;
-  final bool isPasswordValid;
   final TextEditingController passwordController;
-  final String? Function(String?)? passwordValidator;
-  final Function()? onPasswordVisibilityToggle;
   final TextInputAction? textInputAction;
 
   const PasswordTextField({
     super.key,
     required this.label,
     required this.padding,
-    required this.isPasswordObscure,
-    required this.isPasswordValid,
     required this.passwordController,
-    this.passwordValidator,
-    required this.onPasswordVisibilityToggle,
     this.textInputAction = TextInputAction.next,
   });
+
+  @override
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
+}
+
+class _PasswordTextFieldState extends State<PasswordTextField> {
+  bool isPasswordValid = true;
+  bool isPasswordObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -31,35 +32,49 @@ class PasswordTextField extends StatelessWidget {
         ? ConstColors.lightInputField
         : ConstColors.lightWrongInputField;
 
-    return Hero(
-      tag: label,
-      child: Material(
-        child: Padding(
-          padding: padding,
-          child: TextFormField(
-            controller: passwordController,
-            decoration: InputDecoration(
-              prefixIcon: RepaintBoundary(
-                child: Icon(Icons.lock_outline, size: 24, color: color),
-              ),
-              suffixIcon: IconButton(
-                icon: Icon(
-                  isPasswordObscure ? Icons.visibility_off : Icons.visibility,
-                  size: 28.spMin,
-                  color: color,
+    return RepaintBoundary(
+      child: Hero(
+        tag: widget.label,
+        child: Material(
+          child: Padding(
+            padding: widget.padding,
+            child: TextFormField(
+              controller: widget.passwordController,
+              decoration: InputDecoration(
+                prefixIcon: RepaintBoundary(
+                  child: Icon(Icons.lock_outline, size: 24, color: color),
                 ),
-                onPressed: onPasswordVisibilityToggle,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    isPasswordObscure ? Icons.visibility_off : Icons.visibility,
+                    size: 28.spMin,
+                    color: color,
+                  ),
+                  onPressed: _onPasswordVisibilityToggle,
+                ),
+                label: Text(widget.label, style: TextStyle().copyWith(color: color)),
               ),
-              label: Text(label, style: TextStyle().copyWith(color: color)),
+              textInputAction: widget.textInputAction,
+              keyboardType: TextInputType.visiblePassword,
+              autofillHints: [AutofillHints.password],
+              obscureText: isPasswordObscure,
+              validator: _passwordValidator,
             ),
-            textInputAction: textInputAction,
-            keyboardType: TextInputType.visiblePassword,
-            autofillHints: [AutofillHints.password],
-            obscureText: isPasswordObscure,
-            validator: passwordValidator,
           ),
         ),
       ),
     );
+  }
+
+  String? _passwordValidator(final String? value) {
+    final String? res = Validator.validatePassword(value);
+    if ((res == null) != isPasswordValid) {
+      setState(() => isPasswordValid = !isPasswordValid);
+    }
+    return res;
+  }
+
+  void _onPasswordVisibilityToggle() {
+    setState(() => isPasswordObscure = !isPasswordObscure);
   }
 }

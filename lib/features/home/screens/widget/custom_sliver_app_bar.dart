@@ -35,10 +35,9 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
       actions: [SizedBox.shrink()],
       backgroundColor: Colors.transparent,
       shape: RoundedRectangleBorder(
-
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(18.r),
-          bottomRight: Radius.circular(18.r),
+          bottomLeft: Radius.circular(18),
+          bottomRight: Radius.circular(18),
         ),
       ),
       flexibleSpace: LayoutBuilder(
@@ -53,21 +52,17 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
+                      stops: const [0.0, 0.6, 0.85, 1.0],
                       colors: [
-                        theme.scaffoldBackgroundColor.withAlpha(255),
-                        theme.scaffoldBackgroundColor.withAlpha(255),
-                        theme.scaffoldBackgroundColor.withAlpha(255),
-                        theme.scaffoldBackgroundColor.withAlpha(255),
-                        theme.scaffoldBackgroundColor.withAlpha(255),
-
-                        theme.scaffoldBackgroundColor.withAlpha(120),
+                        theme.scaffoldBackgroundColor,
+                        theme.scaffoldBackgroundColor,
+                        theme.scaffoldBackgroundColor.withAlpha(200),
                         theme.scaffoldBackgroundColor.withAlpha(80),
-
                       ],
                     ),
                     borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(18.r),
-                      bottomRight: Radius.circular(18.r),
+                      bottomLeft: Radius.circular(18),
+                      bottomRight: Radius.circular(18),
                     ),
                   ),
                 ),

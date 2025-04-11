@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sakeny/utils/constants/const_text.dart';
 
 import '../../../utils/constants/const_colors.dart';
 
@@ -22,19 +23,7 @@ class SelectLocation extends StatelessWidget {
     Color color = isPhoneValid ? ConstColors.lightInputField : ConstColors.lightWrongInputField;
     return Padding(
       padding: padding,
-      child: TextFormField(
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.location_on_outlined, size: 28.spMin, color: color),
-          label: Text(
-            label,
-            style: TextStyle().copyWith(color: color),
-          ),
-        ),
-        textInputAction: TextInputAction.next,
-        autofillHints: [AutofillHints.telephoneNumber],
-        keyboardType: TextInputType.streetAddress,
-        validator: phoneValidator,
-      ),
+      child: ElevatedButton(onPressed: () {}, child: Text(ConstText.location)),
     );
   }
 }

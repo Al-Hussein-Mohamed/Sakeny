@@ -4,58 +4,70 @@ import 'package:sakeny/features/drawer/models/drawer_tile_model.dart';
 import 'package:sakeny/features/drawer/screens/widgets/log_out_dialog.dart';
 import 'package:sakeny/utils/constants/const_text.dart';
 
-void Function() onTileTap(BuildContext context, DrawerTileModel drawerTile, String RouteName) {
+void Function() onTileTap(BuildContext context, DrawerTileModel drawerTile, String routeName) {
+  return () {
+    // close the drawer
+    Navigator.pop(context);
+
+    // tile tap action
+    tileTapAction(context, drawerTile, routeName);
+  };
+}
+
+void tileTapAction(BuildContext context, DrawerTileModel drawerTile, String routeName) {
   switch (drawerTile.title) {
     case ConstText.drawerMyProfile:
-      return () {};
+      break;
 
     case ConstText.drawerHome:
-      return _homeOnTap(context, drawerTile, RouteName);
+      _homeOnTap(context, drawerTile, routeName);
+      break;
 
     case ConstText.drawerChat:
-      return () => print("Chat");
+      break;
 
     case ConstText.drawerFavorites:
-      return () => print("Favorites");
+      break;
 
     case ConstText.drawerNotification:
-      return () {};
+      break;
 
     case ConstText.drawerFilters:
-      return () {};
+      break;
 
     case ConstText.drawerAddEstate:
-      return () {};
+      break;
 
     case ConstText.drawerLanguage:
-      return () {};
+      break;
 
     case ConstText.drawerLogout:
-      return _logoutOnTap(context, drawerTile, RouteName);
+      _logoutOnTap(context, drawerTile, routeName);
+      break;
 
     default:
-      return () {};
   }
 }
 
-void Function() _homeOnTap(BuildContext context, DrawerTileModel drawerTile, String RouteName) {
-  if (RouteName == PageRouteNames.home) {
-    return () => Navigator.pop(context);
-  }
-  return () => Navigator.pushReplacementNamed(context, PageRouteNames.home);
+void _homeOnTap(BuildContext context, DrawerTileModel drawerTile, String routeName) {
+  if (routeName == PageRouteNames.home) return;
+
+  Navigator.pushReplacementNamed(context, PageRouteNames.home);
 }
 
-void Function() _logoutOnTap(BuildContext context, DrawerTileModel drawerTile, String RouteName) {
-  return () async {
-    final res = await showDialog(
-      context: context,
-      builder: (context) {
-        return LogOutDialog();
-      },
+void _logoutOnTap(BuildContext context, DrawerTileModel drawerTile, String routeName) async {
+
+  final navigator = Navigator.of(context);
+
+  final res = await showDialog(
+    context: context,
+    builder: (context) => LogOutDialog(),
+  );
+
+  if (res == true) {
+    navigator.pushNamedAndRemoveUntil(
+      PageRouteNames.login,
+          (route) => false,
     );
-
-    if (res == true) {
-      Navigator.pushReplacementNamed(context, PageRouteNames.login);
-    }
-  };
+  }
 }

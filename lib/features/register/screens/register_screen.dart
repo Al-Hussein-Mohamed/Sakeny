@@ -8,7 +8,7 @@ import 'package:sakeny/core/routing/page_route_name.dart';
 import 'package:sakeny/core/services/snack_bar/snack_bar_service.dart';
 import 'package:sakeny/features/register/screens/widgets/profile_picture_custom_widget.dart';
 import 'package:sakeny/utils/constants/const_text.dart';
-import '../../../common/widgets/selcect_location.dart';
+import '../../../common/widgets/select_location.dart';
 import '../../../common/widgets/text_fields/password_text_field.dart';
 import '../../../common/widgets/text_fields/phone_text_field.dart';
 import '../../../common/widgets/top_bar_language.dart';
@@ -72,67 +72,67 @@ class _RegisterBody extends StatelessWidget {
         const SizedBox(height: 15),
 
         // First name field.
-        NameTextField(
-          padding: const EdgeInsets.all(5),
-          label: ConstText.firstName,
-          isNameValid: registerCubit.isFirstNameValid,
-          nameController: registerCubit.firstNameController,
-          nameValidator: registerCubit.firstNameValidator,
-        ),
+        // NameTextField(
+        //   padding: const EdgeInsets.all(5),
+        //   label: ConstText.firstName,
+        //   isNameValid: registerCubit.isFirstNameValid,
+        //   nameController: registerCubit.firstNameController,
+        //   nameValidator: registerCubit.firstNameValidator,
+        // ),
         const SizedBox(height: 15),
 
         // Last name field.
-        NameTextField(
-          padding: const EdgeInsets.all(5),
-          label: ConstText.lastName,
-          isNameValid: registerCubit.isLastNameValid,
-          nameController: registerCubit.lastNameController,
-          nameValidator: registerCubit.lastNameValidator,
-        ),
+        // NameTextField(
+        //   padding: const EdgeInsets.all(5),
+        //   label: ConstText.secondName,
+        //   isNameValid: registerCubit.isLastNameValid,
+        //   nameController: registerCubit.lastNameController,
+        //   nameValidator: registerCubit.lastNameValidator,
+        // ),
         const SizedBox(height: 15),
 
         // Email field.
-        EmailTextField(
-          padding: const EdgeInsets.all(5),
-          emailController: registerCubit.emailController,
-          isEmailValid: registerCubit.isEmailValid,
-          emailValidator: registerCubit.emailValidator,
-        ),
-        const SizedBox(height: 15),
-
-        // Phone number field.
-        PhoneTextField(
-          padding: const EdgeInsets.all(5),
-          label: ConstText.phoneNumber,
-          isPhoneValid: registerCubit.isPhoneNumberValid,
-          phoneController: registerCubit.phoneNumberController,
-          phoneValidator: registerCubit.phoneNumberValidator,
-        ),
-        const SizedBox(height: 15),
-
-        // Password field.
-        PasswordTextField(
-          padding: const EdgeInsets.all(5),
-          label: ConstText.password,
-          passwordController: registerCubit.passwordController,
-          isPasswordValid: registerCubit.isPasswordValid,
-          isPasswordObscure: registerCubit.isPasswordObscure,
-          passwordValidator: registerCubit.passwordValidator,
-          onPasswordVisibilityToggle: registerCubit.togglePasswordVisibility,
-        ),
-        const SizedBox(height: 15),
-
-        // Confirm password field.
-        PasswordTextField(
-          padding: const EdgeInsets.all(5),
-          label: ConstText.confirmPassword,
-          passwordController: registerCubit.confirmPasswordController,
-          isPasswordValid: registerCubit.isConfirmPasswordValid,
-          isPasswordObscure: registerCubit.isConfirmPasswordObscure,
-          passwordValidator: registerCubit.confirmPasswordValidator,
-          onPasswordVisibilityToggle: registerCubit.toggleConfirmPasswordVisibility,
-        ),
-        const SizedBox(height: 15),
+        // EmailTextField(
+        //   padding: const EdgeInsets.all(5),
+        //   emailController: registerCubit.emailController,
+        //   isEmailValid: registerCubit.isEmailValid,
+        //   emailValidator: registerCubit.emailValidator,
+        // ),
+        // const SizedBox(height: 15),
+        //
+        // // Phone number field.
+        // PhoneTextField(
+        //   padding: const EdgeInsets.all(5),
+        //   label: ConstText.phoneNumber,
+        //   isPhoneValid: registerCubit.isPhoneNumberValid,
+        //   phoneController: registerCubit.phoneNumberController,
+        //   phoneValidator: registerCubit.phoneNumberValidator,
+        // ),
+        // const SizedBox(height: 15),
+        //
+        // // Password field.
+        // PasswordTextField(
+        //   padding: const EdgeInsets.all(5),
+        //   label: ConstText.password,
+        //   passwordController: registerCubit.passwordController,
+        //   isPasswordValid: registerCubit.isPasswordValid,
+        //   isPasswordObscure: registerCubit.isPasswordObscure,
+        //   passwordValidator: registerCubit.passwordValidator,
+        //   onPasswordVisibilityToggle: registerCubit.togglePasswordVisibility,
+        // ),
+        // const SizedBox(height: 15),
+        //
+        // // Confirm password field.
+        // PasswordTextField(
+        //   padding: const EdgeInsets.all(5),
+        //   label: ConstText.confirmPassword,
+        //   passwordController: registerCubit.confirmPasswordController,
+        //   isPasswordValid: registerCubit.isConfirmPasswordValid,
+        //   isPasswordObscure: registerCubit.isConfirmPasswordObscure,
+        //   passwordValidator: registerCubit.confirmPasswordValidator,
+        //   onPasswordVisibilityToggle: registerCubit.toggleConfirmPasswordVisibility,
+        // ),
+        // const SizedBox(height: 15),
 
         // Location field.
         SelectLocation(

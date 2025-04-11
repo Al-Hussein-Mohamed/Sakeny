@@ -104,19 +104,13 @@ class LoginBody extends StatelessWidget {
             EmailTextField(
               padding: EdgeInsets.all(20.r),
               emailController: loginCubit.emailController,
-              emailValidator: loginCubit.emailValidator,
-              isEmailValid: loginCubit.isEmailValid,
             ),
 
             // Password field
             PasswordTextField(
               padding: EdgeInsets.only(left: 20.r, right: 20.r, top: 8.r, bottom: 8.r),
               label: ConstText.password,
-              isPasswordObscure: loginCubit.isPasswordObscure,
-              isPasswordValid: loginCubit.isPasswordValid,
               passwordController: loginCubit.passwordController,
-              passwordValidator: loginCubit.passwordValidator,
-              onPasswordVisibilityToggle: loginCubit.togglePasswordVisibility,
             ),
 
             // Forgot password

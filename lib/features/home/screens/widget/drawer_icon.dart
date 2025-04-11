@@ -20,26 +20,26 @@ class DrawerIcon extends StatelessWidget {
         elevation: 8,
         color: ConstColors.primaryColor,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10.r),
-          bottomLeft: Radius.circular(10.r),
+          topLeft: Radius.circular(10),
+          bottomLeft: Radius.circular(10),
         ),
         child: Hero(
           tag: "drawerIcon",
           child: InkWell(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10.r),
-              bottomLeft: Radius.circular(10.r),
+              topLeft: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
             ),
             onTap: () => homeCubit.scaffoldKey.currentState?.openEndDrawer(),
             child: Container(
-              width: 55.h,
-              height: 55.h,
+              width: homeCubit.drawerIconHeight,
+              height: homeCubit.drawerIconHeight,
               padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.transparent,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10.r),
-                  bottomLeft: Radius.circular(10.r),
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
                 ),
               ),
 

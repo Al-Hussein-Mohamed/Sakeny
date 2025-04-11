@@ -26,20 +26,39 @@ void main() async {
   Bloc.observer = MyBlocObserver();
 
   runApp(
-    ScreenUtilInit(
-      designSize: const Size(393, 852),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (cont, child) {
-        loadAssets(cont);
-        return ChangeNotifierProvider(
-          create: (context) => SettingsProvider(),
-          child: Sakeny(),
-        );
-      },
+    Preview(
+      devicePreview: false,
+      child: ScreenUtilInit(
+        // designSize: const Size(393, 852),
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (cont, child) {
+          loadAssets(cont);
+          return ChangeNotifierProvider(
+            create: (context) => SettingsProvider(),
+            child: Sakeny(),
+          );
+        },
+      ),
     ),
   );
 }
+
+class Preview extends StatelessWidget {
+  final bool devicePreview;
+  final Widget child;
+  const Preview({super.key, this.devicePreview = false, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return devicePreview ? DevicePreview(
+      enabled: devicePreview,
+      builder: (context) => child,
+    ) : child;
+  }
+}
+
 
 class Sakeny extends StatelessWidget {
   const Sakeny({super.key});
@@ -58,7 +77,7 @@ class Sakeny extends StatelessWidget {
       title: 'Sakeny',
       debugShowCheckedModeBanner: false,
       theme: settingsProvider.themeData,
-      initialRoute: PageRouteNames.onboarding,
+      initialRoute: PageRouteNames.home,
       onGenerateRoute: PageRouter.onGenerateRoute,
       builder: EasyLoading.init(),
     );

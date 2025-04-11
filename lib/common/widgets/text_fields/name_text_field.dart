@@ -1,44 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:sakeny/utils/validators/validation.dart';
 import '../../../utils/constants/const_colors.dart';
 
-class NameTextField extends StatelessWidget {
-  final EdgeInsetsGeometry padding;
+class NameTextField extends StatefulWidget {
+  final EdgeInsetsGeometry? padding;
   final String label;
-  final bool isNameValid;
-  final String? Function(String?)? nameValidator;
   final TextEditingController nameController;
 
   const NameTextField({
     super.key,
-    required this.padding,
+    this.padding = const EdgeInsets.all(0),
     required this.label,
-    required this.isNameValid,
     required this.nameController,
-    required this.nameValidator,
   });
 
   @override
+  State<NameTextField> createState() => _NameTextFieldState();
+}
+
+class _NameTextFieldState extends State<NameTextField> {
+  bool isNameValid = true;
+
+  @override
   Widget build(BuildContext context) {
-    final Color color = isNameValid
-        ? ConstColors.lightInputField
-        : ConstColors.lightWrongInputField;
+    final Color color = isNameValid ? ConstColors.lightInputField : ConstColors.lightWrongInputField;
     return Padding(
-      padding: padding,
+      padding: widget.padding!,
       child: TextFormField(
-        controller: nameController,
+        controller: widget.nameController,
         decoration: InputDecoration(
-          prefixIcon: RepaintBoundary(
-            child: Icon(Icons.person_outline_rounded, size: 24, color: color),
-          ),
-          label: Text(
-            label,
-            style: TextStyle().copyWith(color: color),
-          ),
+          prefixIcon: Icon(Icons.person_outline_rounded, size: 24, color: color),
+          label: Text(widget.label, style: TextStyle().copyWith(color: color)),
         ),
         keyboardType: TextInputType.name,
         textInputAction: TextInputAction.next,
-        validator: nameValidator,
+        validator: _validateName,
       ),
     );
+  }
+
+  String? _validateName(final String? value) {
+    final res = Validator.validateName(value);
+    if ((res == null) != isNameValid) {
+      setState(() => isNameValid = !isNameValid);
+    }
+    return res;
   }
 }

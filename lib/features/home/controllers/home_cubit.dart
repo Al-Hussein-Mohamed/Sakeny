@@ -14,28 +14,28 @@ class HomeCubit extends Cubit<HomeState> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final ScrollController scrollController = ScrollController();
 
-  final double appBarMaxHeight = 210.h;
-  final double appBarMinHeight = 95.h;
+  final double appBarMaxHeight = 180.h;
+  final double appBarMinHeight = 80.h;
 
   double appBarHeight = 0;
   double topPadding = 0;
   double progress = 0;
   double screenWidth = 0;
 
-  final double drawerIconHeight = 55.h;
+  final double drawerIconHeight = 45.h;
   double drawerIconTopOffset = 0;
 
-  final double searchBarMaxHeight = 65.h;
-  final double searchBarMinHeight = 55.h;
+  final double searchBarMaxHeight = 55.h;
+  final double searchBarMinHeight = 45.h;
   double searchBarMaxWidth = 0;
   double searchBarMinWidth = 0;
   double searchBarHeight = 0;
   double searchBarWidth = 0;
   double searchBarTopOffset = 0;
-  double searchBarLeftOffset = 16.w;
+  double searchBarLeftOffset = 16;
 
-  final double titleMaxHeight = 90.h;
-  final double titleMinHeight = 50.h;
+  final double titleMaxHeight = 80.h;
+  final double titleMinHeight = 40.h;
   double titleScale = 1;
   double titleTopOffset = 0;
   double titleLeftOffset = 0;
@@ -95,6 +95,6 @@ class HomeCubit extends Cubit<HomeState> {
 
     double offsetBuffer = (((appBarHeight - appBarMinHeight) / (appBarMaxHeight - appBarMinHeight))) * 30.h;
     titleTopOffset = searchBarTopOffset - titleMaxHeight - offsetBuffer + 30.h;
-    titleLeftOffset = 22.w - Curves.easeIn.transform(1 - progress) * screenWidth;
+    titleLeftOffset = 22 - Curves.easeIn.transform(1 - progress) * screenWidth;
   }
 }

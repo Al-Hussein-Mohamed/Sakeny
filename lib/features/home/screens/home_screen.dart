@@ -75,7 +75,7 @@ class DummyContainer extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 300.h,
-      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
         color: ConstColors.primaryColor.withAlpha(((index % 5) * 100 + 100)%256),

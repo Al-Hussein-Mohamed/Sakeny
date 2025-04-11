@@ -27,23 +27,39 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     Navigator.pushReplacementNamed(context, PageRouteNames.home);
   }
 
+  void openDrawer() {
+    if (scaffoldKey.currentState != null) {
+      scaffoldKey.currentState!.openEndDrawer();
+    }
+  }
+
+  void closeDrawer(){
+    if (scaffoldKey.currentState != null) {
+      scaffoldKey.currentState!.closeEndDrawer();
+    }
+  }
+
+  void goBack(BuildContext context) {
+    Navigator.pop(context);
+  }
+
   // -----------------------------------------------------------------------
 
   bool isFirstNameValid = true;
-  bool isLastNameValid = true;
+  bool isSecondNameValid = true;
   bool isEmailValid = true;
   bool isPhoneNumberValid = true;
   bool isPasswordValid = true;
 
   final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController secondNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   void setup() {
     isFirstNameValid = true;
-    isLastNameValid = true;
+    isSecondNameValid = true;
     isEmailValid = true;
     isPhoneNumberValid = true;
     isPasswordValid = true;
@@ -55,9 +71,9 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     return res;
   }
 
-  String? lastNameValidator(String? value) {
+  String? secondNameValidator(String? value) {
     String? res = Validator.validateName(value);
-    isLastNameValid = (res == null);
+    isSecondNameValid = (res == null);
     return res;
   }
 

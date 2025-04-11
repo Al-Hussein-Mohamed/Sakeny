@@ -28,7 +28,7 @@ class ConstText {
   // Register text
   static const String registerTitle = "Create an account";
   static const String firstName = "First Name";
-  static const String lastName = "Last Name";
+  static const String secondName = "Second Name";
   static const String phoneNumber = "Phone Number";
   static const String confirmPassword = "Confirm Password";
   static const String location = "Location";

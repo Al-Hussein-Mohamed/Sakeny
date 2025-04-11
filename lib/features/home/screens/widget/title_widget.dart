@@ -17,6 +17,7 @@ class TitleWidget extends StatelessWidget {
     Set<String> blackList = {
       PageRouteNames.home,
     };
+
     return Positioned(
       top: homeCubit.titleTopOffset,
       left: homeCubit.titleLeftOffset,
